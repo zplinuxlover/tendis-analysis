@@ -5,4 +5,21 @@
  * Learn how to create Gradle builds at https://guides.gradle.org/creating-new-gradle-builds
  */
 
+apply plugin: "maven"
+apply plugin: "java"
 
+repositories {
+    mavenCentral()
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+}
+
+dependencies {
+    compile "org.rocksdb:rocksdbjni:5.13.4"
+    compile "org.slf4j:slf4j-api:1.7.36"
+    compile "org.bouncycastle:bcprov-jdk15on:1.70"
+    compile "org.apache.commons:commons-lang3:3.12.0"
+    compileOnly "org.projectlombok:lombok:1.18.24"
+    annotationProcessor "org.projectlombok:lombok:1.18.24"
+    compile "com.beust:jcommander:1.82"
+    compile "com.google.guava:guava:31.1-jre"
+}

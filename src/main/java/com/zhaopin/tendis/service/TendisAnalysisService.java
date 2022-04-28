@@ -32,7 +32,7 @@ public class TendisAnalysisService {
         long sucessCount = 0, unknownCount = 0;
         Options option = new Options();
         Filter filter = new BloomFilter(10);
-        option.setCreateIfMissing(true);
+        option.setCreateIfMissing(false);
         RocksDB rocksDB = RocksDB.openReadOnly(option, dbPath);
         try {
             RocksIterator it = rocksDB.newIterator();

@@ -29,6 +29,7 @@ public class TendisAnalysisService {
     }
 
     public void execute(final String dbPath) throws Exception {
+        long sucessCount = 0, unknownCount = 0;
         Options option = new Options();
         Filter filter = new BloomFilter(10);
         option.setCreateIfMissing(true);
@@ -42,10 +43,19 @@ public class TendisAnalysisService {
                     LOGGER.debug("key={}, value={}", key, value);
                 }
                 final RecordKey rk = decode(key);
+                if (rk != null) {
+                    ++sucessCount;
+                } else {
+                    ++unknownCount;
+                }
                 if (LOGGER.isDebugEnabled()) {
                     LOGGER.debug("decode key result is {}", rk);
                 }
+                if ((sucessCount + unknownCount) % 1000000 == 0) {
+                    LOGGER.info("the analysis intermediate result is success count={}, unknown count={}", sucessCount, unknownCount);
+                }
             }
+            LOGGER.info("the analysis final result is success count={}, unknown count={}", sucessCount, unknownCount);
         } finally {
             rocksDB.close();
         }

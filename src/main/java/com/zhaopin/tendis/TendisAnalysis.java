@@ -14,6 +14,11 @@ public class TendisAnalysis {
 
     public static Logger LOGGER = LoggerFactory.getLogger(TendisAnalysis.class);
 
+    /**
+     * usage --dbpath rocksdbPath
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
         final Args analysisArgs = new Args();
         JCommander jcommander = new JCommander(analysisArgs);
